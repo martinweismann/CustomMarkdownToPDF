@@ -1,25 +1,30 @@
 # Configuration file for Travis CI (https://travis-ci.org)
 #
-# It used as a status check for all PRs and
-# to generate the build-status-icon in the main README.md-file.
+# It used to create a redistributable, standalone and printable PDF
+# version of a specification document written in markdown (3MF-stile).
 
 dist: xenial
 language: python
 python: 3.7
 
-before_install:
-  - sudo apt-get install -y wkhtmltopdf
-  - sudo apt-get install -y xvfb
-  - sudo echo -e '#!/bin/bash\nxvfb-run -a --server-args="-screen 0, 1024x768x24" wkhtmltopdf -q $*' > wkhtmltopdf2.sh
-  - sudo chmod a+x wkhtmltopdf2.sh
-  - sudo ln -s wkhtmltopdf2.sh wkhtmltopdf_exec
+#before_install:
+#  - sudo apt-get install -y wkhtmltopdf
+#  - sudo apt-get install -y xvfb
+#  - sudo echo -e '#!/bin/bash\nxvfb-run -a --server-args="-screen 0, 1024x768x24" wkhtmltopdf -q $*' > wkhtmltopdf2.sh
+#  - sudo chmod a+x wkhtmltopdf2.sh
+#  - sudo ln -s wkhtmltopdf2.sh wkhtmltopdf_exec
 install:
   - pip install grip
 
 script:
+  - wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+  - tar vxf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+  - cp wkhtmltox/bin/wkhtmltopdf .
+  - chmod a+x wkhtmltopdf
   - grip "3MF Core Specification.md" --export "Spec.html"
   - ./fixHtmlBugs.sh Spec.html SpecFixed.html
-  - ./wkhtmltopdf_exec --title "3MF Core Specification" --footer-left "[section]" --footer-right "[page]/[topage]" --footer-font-size 7 --footer-spacing 2 SpecFixed.html Spec.pdf
+  - ./wkhtmltopdf --title "3MF Core Specification" --footer-left "[section]" --footer-right "[page]/[topage]" --footer-font-size 7 --footer-spacing 2 SpecFixed.html Spec.pdf
+  
 deploy:
   provider: releases 
   api_key: '$GITHUB_API_KEY'
