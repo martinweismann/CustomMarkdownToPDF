@@ -17,11 +17,12 @@ install:
   - pip install grip
 
 script:
-  - grip README.md --export README.html
-  - ./wkhtmltopdf_exec --enable-toc-back-links --enable-internal-links README.html README.pdf
+  - grip "3MF Core Specification.md" --export "Spec.html"
+  - ./fixHtmlBugs.sh Spec.html Spec.pdf
+  - ./wkhtmltopdf_exec --enable-toc-back-links --enable-internal-links Spec.html Spec.pdf
 deploy:
   provider: releases 
   api_key: '$GITHUB_API_KEY'
-  file: README.pdf
+  file: Spec.pdf
   skip_cleanup: true
   draft: true
