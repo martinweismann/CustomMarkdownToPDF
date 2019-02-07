@@ -10,13 +10,13 @@ python: 3.7
 before_install:
   - sudo apt-get install -y wkhtmltopdf
   - sudo apt-get install -y xvfb
-  - sudo echo -e '#!/bin/bash\nxvfb-run -a --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf -q $*' > /usr/bin/wkhtmltopdf.sh
-  - sudo chmod a+x /usr/bin/wkhtmltopdf.sh
-  - sudo ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
+  - sudo echo -e '#!/bin/bash\nxvfb-run -a --server-args="-screen 0, 1024x768x24" wkhtmltopdf -q $*' > wkhtmltopdf2.sh
+  - sudo chmod a+x wkhtmltopdf2.sh
+  - sudo ln -s wkhtmltopdf2.sh wkhtmltopdf_exec
 install:
   - pip install grip
 
 script:
   - grip README.md --export README.html
-  - wkhtmltopdf --enable-toc-back-links --enable-internal-links README.html README.pdf
+  - ./wkhtmltopdf_exec --enable-toc-back-links --enable-internal-links README.html README.pdf
 
