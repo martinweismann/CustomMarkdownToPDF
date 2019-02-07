@@ -18,8 +18,8 @@ install:
 
 script:
   - grip "3MF Core Specification.md" --export "Spec.html"
-  - ./fixHtmlBugs.sh Spec.html Spec.pdf
-  - ./wkhtmltopdf_exec --enable-toc-back-links --enable-internal-links Spec.html Spec.pdf
+  - ./fixHtmlBugs.sh Spec.html SpecFixed.html
+  - ./wkhtmltopdf_exec --enable-toc-back-links --enable-internal-links SpecFixed.html Spec.pdf
 deploy:
   provider: releases 
   api_key: '$GITHUB_API_KEY'
