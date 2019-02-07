@@ -21,9 +21,9 @@ script:
   - tar vxf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
   - cp wkhtmltox/bin/wkhtmltopdf .
   - chmod a+x wkhtmltopdf
-  - grip "3MF Core Specification.md" --export "Spec.html"
+  - grip "3MF Core Specification.md" --export "Spec.html" --user=martin.weismann --pass="$GITHUB_API_KEY"
   - ./fixHtmlBugs.sh Spec.html SpecFixed.html
-  - ./wkhtmltopdf --title "3MF Core Specification" --footer-left "[section]" --footer-right "[page]/[topage]" --footer-font-size 7 --footer-spacing 2 SpecFixed.html Spec.pdf
+  - ./wkhtmltopdf --title "3MF Core Specification" --footer-left "[section]" --footer-right "[page]/[topage]" --footer-font-size 7 --footer-spacing 2 --margin-top 14 --margin-left 14 --margin-right 14 --margin-bottom 14 SpecFixed.html Spec.pdf
   
 deploy:
   provider: releases 
