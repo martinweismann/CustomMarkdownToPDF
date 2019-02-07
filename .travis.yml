@@ -1,0 +1,17 @@
+# Configuration file for Travis CI (https://travis-ci.org)
+#
+# It used as a status check for all PRs and
+# to generate the build-status-icon in the main README.md-file.
+
+dist: xenial
+language: python
+python: 3.7
+
+before_install:
+  - sudo apt-get install -y wkhtmltopdf
+install:
+  - pip install grip
+
+script:
+  - grip README.md --export README.html
+
