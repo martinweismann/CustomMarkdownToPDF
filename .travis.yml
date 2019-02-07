@@ -22,6 +22,6 @@ script:
 deploy:
   provider: releases 
   api_key: '$GITHUB_API_KEY'
-  file: README.md
+  file: README.pdf
   skip_cleanup: true
   draft: true
