@@ -19,7 +19,7 @@ install:
 script:
   - grip "3MF Core Specification.md" --export "Spec.html"
   - ./fixHtmlBugs.sh Spec.html SpecFixed.html
-  - ./wkhtmltopdf_exec --title "3MF Core Specification" --enable-toc-back-links --enable-internal-links --footer-left "[section]" --footer-right "[page]/[topage]" --footer-font-size 7 --footer-spacing 2  --margin-top 14 --margin-left 14 --margin-right 14 --margin-bottom 14 SpecFixed.html Spec.pdf
+  - ./wkhtmltopdf_exec --title "3MF Core Specification" --footer-left "[section]" --footer-right "[page]/[topage]" --footer-font-size 7 --footer-spacing 2 SpecFixed.html Spec.pdf
 deploy:
   provider: releases 
   api_key: '$GITHUB_API_KEY'
