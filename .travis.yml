@@ -40,7 +40,7 @@ script:
   - ./mdToPDF/mdToPDF.sh "$SPECNAME"
   
 deploy:
-  provider: releases 
+  provider: releases
   api_key: '$GITHUB_API_KEY'
   file: '${SPECNAME}.pdf'
   skip_cleanup: true

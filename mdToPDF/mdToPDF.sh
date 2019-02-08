@@ -26,7 +26,7 @@
 FILE="$1"
 TMPFILE="temp.html"
 
-grip "$FILE.md" --export "$FILE.html" --user=martin.weismann --pass="$GITHUB_API_KEY"
+grip "$FILE.md" --export "$FILE.html"
 sed "s|readme boxed-group clearfix announce instapaper_body md||g" "$FILE.html" > "$TMPFILE"
 sed -i "s|.md$||g" "$TMPFILE"
 sed -i 's|<a href="images/3mf_logo_50px.png"|<a|g' "$TMPFILE"
