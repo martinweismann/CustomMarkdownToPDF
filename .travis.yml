@@ -1,7 +1,7 @@
 # Configuration file for Travis CI (https://travis-ci.org)
 #
 # It used to create a redistributable, standalone and printable PDF
-# version of a specification document written in markdown (3MF-stile).
+# version of a specification document written in markdown (3MF-style).
 
 dist: xenial
 language: python
@@ -9,22 +9,16 @@ python: 3.7
 
 install:
   - pip install grip
-  
+  - install_wkhtmltopdf.sh
   # potentially use this instead: https://gitlab.com/OleMussmann/marge
 
 script:
-  - wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
-  - tar vxf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
-  - cp wkhtmltox/bin/wkhtmltopdf .
-  - chmod a+x wkhtmltopdf
-  - grip "3MF Core Specification.md" --export "Spec.html" --user=martin.weismann --pass="$GITHUB_API_KEY"
-  - ./fixHtmlBugs.sh Spec.html SpecFixed.html
-  - ./wkhtmltopdf --title "3MF Core Specification" --footer-left "[section]" --footer-right "[page]/[topage]" --footer-font-size 7 --footer-spacing 2 --margin-top 14 --margin-left 14 --margin-right 14 --margin-bottom 14 SpecFixed.html Spec.pdf
+  - ./mdToPDF.sh "3MF Core Specification"
   
 deploy:
   provider: releases 
   api_key: '$GITHUB_API_KEY'
-  file: Spec.pdf
+  file: "3MF Core Specification.pdf"
   skip_cleanup: true
   draft: true
   name: "Snapshot"
