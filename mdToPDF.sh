@@ -14,8 +14,7 @@ sed -i 's|<a href="@|<a href="#|g' "$TMPFILE"
 
 MARGIN=14
 
-./wkhtmltopdf --title "$FILE" --footer-left "[section]" --footer-right "[page]/[topage]" --footer-font-size 7 --footer-spacing 2\
---margin-top $MARGIN --margin-left $MARGIN --margin-right $MARGIN --margin-bottom $MARGIN\
+./wkhtmltopdf --title "$FILE" --footer-left "[section]" --footer-right "[page]/[topage]" --footer-font-size 7 --footer-spacing 2 \
+--margin-top $MARGIN --margin-left $MARGIN --margin-right $MARGIN --margin-bottom $MARGIN \
+--zoom 1.2 --image-dpi 720\
 "$TMPFILE" "$FILE.pdf"
-
-
