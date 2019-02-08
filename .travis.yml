@@ -34,10 +34,10 @@ env:
   - SPECNAME="3MF Core Specification"
 install:
   - pip install grip
-  - ./install_wkhtmltopdf.sh
+  - ./mdToPDF/install_wkhtmltopdf.sh
 
 script:
-  - ./mdToPDF.sh "$SPECNAME"
+  - ./mdToPDF/mdToPDF.sh "$SPECNAME"
   
 deploy:
   provider: releases 
