@@ -1,7 +1,7 @@
 #!/bin/bash
 
 FILE="$1"
-TMPFILE="$1.html.tmp"
+TMPFILE="temp.html"
 
 grip "$FILE.md" --export "$FILE.html" --user=martin.weismann --pass="$GITHUB_API_KEY"
 sed "s|readme boxed-group clearfix announce instapaper_body md||g" "$FILE.html" > "$TMPFILE"
