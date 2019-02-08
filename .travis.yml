@@ -9,7 +9,7 @@ python: 3.7
 
 install:
   - pip install grip
-  - install_wkhtmltopdf.sh
+  - ./install_wkhtmltopdf.sh
   # potentially use this instead: https://gitlab.com/OleMussmann/marge
 
 script:
