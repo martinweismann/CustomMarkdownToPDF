@@ -7,18 +7,20 @@ dist: xenial
 language: python
 python: 3.7
 
+env:
+  - SPECNAME="3MF Core Specification"
 install:
   - pip install grip
   - ./install_wkhtmltopdf.sh
   # potentially use this instead: https://gitlab.com/OleMussmann/marge
 
 script:
-  - ./mdToPDF.sh "3MF Core Specification"
+  - ./mdToPDF.sh "$SPECNAME"
   
 deploy:
   provider: releases 
   api_key: '$GITHUB_API_KEY'
-  file: "3MF Core Specification.pdf"
+  file: '${SPECNAME}.pdf'
   skip_cleanup: true
   draft: true
   name: "Snapshot"
